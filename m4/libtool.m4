@@ -2849,6 +2849,18 @@ uts4*)
   shlibpath_var=LD_LIBRARY_PATH
   ;;
 
+nacl*)
+  # Some NaCl toolchains support shared libraries and others don't.  Use
+  # the output of gcc -v to detemine if the current compiler supports them.
+  if $CC -v 2>&1 | grep -q enable-shared; then
+    version_type=linux
+    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+    soname_spec='${libname}${release}${shared_ext}$major'
+  else
+    dynamic_linker=no
+  fi
+  ;;
+
 *)
   dynamic_linker=no
   ;;
